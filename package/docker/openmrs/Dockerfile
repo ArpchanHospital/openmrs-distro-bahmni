@@ -2,6 +2,7 @@ FROM openmrs/openmrs-core:2.5.12
 
 ENV JMX_PROMETHEUS_JAVAAGENT_VERSION=0.18.0
 ENV OPENMRS_APPLICATION_DATA_DIRECTORY=/openmrs/data
+ENV OMRS_DB_EXTRA_ARGS="&zeroDateTimeBehavior=convertToNull"
 
 USER root
 
@@ -72,6 +73,7 @@ RUN ln -s /etc/bahmni_config ${OPENMRS_APPLICATION_DATA_DIRECTORY}/bahmni_config
 RUN mkdir -p /home/bahmni/patient_images
 RUN mkdir -p /home/bahmni/document_images
 RUN mkdir -p /home/bahmni/uploaded_results
+RUN mkdir -p /home/bahmni/uploaded-files
 COPY package/resources/blank-user.png /etc/bahmni/
 
 # Used by envsubst command for replacing environment values at runtime
